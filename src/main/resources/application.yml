@@ -34,7 +34,7 @@ server:
 anchor:
   cryptog:
     api:
-      url: http://localhost:3000
+      url: https://preprod-vka2.eqima.org
 fineract:
   mifos:
     api:

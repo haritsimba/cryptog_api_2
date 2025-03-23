@@ -27,7 +27,7 @@ public class Wallet {
     private String walletName;
     @Getter
     @Setter
-    private String password;
+    private String PIN;
     @Getter
     @Setter
     private String phoneNumber;

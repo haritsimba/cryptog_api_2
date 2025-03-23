@@ -19,7 +19,7 @@ public class AssociatedTokenAccount {
     Long id;
     String mintName;
     String mintAddress;
-    String associatedTokenAccountAddress;
+    String tokenAccountAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "wallet_id")
