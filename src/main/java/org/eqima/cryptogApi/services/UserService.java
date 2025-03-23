@@ -30,16 +30,6 @@ public class UserService {
         return null;
     }
 
-    public List<AssociatedTokenAccountDto> getUserATAs(UserRepresentation user){
-        Map<String, List<String>> userAttributes = user.getAttributes();
-        if(userAttributes.isEmpty()){
-            return null;
-        } else if (userAttributes.containsKey("ATAs")) {
-            return null;
-        }
-        return (List<AssociatedTokenAccountDto>) new Gson().fromJson(userAttributes.get("ATAs").get(0),List.class);
-    }
-
     public UserRepresentation addATAs(UserRepresentation user, List<AssociatedTokenAccountDto> ATAList) {
         // Récupérer les attributs de l'utilisateur
         Map<String, List<String>> userAttributes = user.getAttributes();
@@ -62,14 +52,19 @@ public class UserService {
         String updatedATAsJson = gson.toJson(userATAs);
 
         // Mettre à jour les attributs de l'utilisateur
-        userAttributes.put("ATAs", Collections.singletonList(updatedATAsJson));
+        userAttributes.put("ATAs", Collections.singletonList(updatedATAsJson)); // Stocker directement la chaîne JSON
         user.setAttributes(userAttributes);
 
+        System.out.println(userAttributes);
         // Mettre à jour l'utilisateur dans Keycloak
         UserResource userResource = keycloakConfig.users().get(user.getId());
         userResource.update(user);
 
-        return user;
+        // Récupérer l'utilisateur mis à jour pour vérification
+        UserRepresentation updatedUser = userResource.toRepresentation();
+        System.out.println("Updated User Attributes: " + updatedUser.getAttributes());
+
+        return updatedUser;
     }
     public UserRepresentation addUserATA(String username,List<AssociatedTokenAccountDto> ATAList){
         UserRepresentation user = keycloakConfig.users().searchByUsername(username,true).get(0);
