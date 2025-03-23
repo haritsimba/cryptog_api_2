@@ -1,23 +1,25 @@
 package org.eqima.cryptogApi.controllers;
 
+import lombok.AllArgsConstructor;
 import org.eqima.cryptogApi.dto.ApiResponseError;
 import org.eqima.cryptogApi.dto.ServiceResponse;
 import org.eqima.cryptogApi.dto.request.CreateWalletForUserRequest;
 import org.eqima.cryptogApi.entities.Wallet;
 import org.eqima.cryptogApi.enums.OrchestratorDataTypes;
 import org.eqima.cryptogApi.services.WalletOrchestratorService;
+import org.eqima.cryptogApi.services.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "wallet")
+@AllArgsConstructor
 public class WalletController {
-    @Autowired
+
     WalletOrchestratorService walletOrchestratorService;
+    WalletService walletService;
+
     @PostMapping(path = "")
     public ResponseEntity<?> createWalletForUser(@RequestBody CreateWalletForUserRequest user){
         ServiceResponse<OrchestratorDataTypes.WalletForUserCreation, Wallet> serviceResponse = walletOrchestratorService.createWalletForUserProcess(user.getUsername(), user.getPhoneNumber(), user.getPIN());
@@ -32,5 +34,9 @@ public class WalletController {
                 return ResponseEntity.internalServerError().body(new ApiResponseError("Erreur lors de création du wallet"));
             }
         }
+    }
+    @GetMapping(path = "/{username}")
+    public ResponseEntity<?> getWalletByUsername(@PathVariable(value = "username") String username){
+        return ResponseEntity.ok().body(walletService.findWalletsByUsername(username));
     }
 }

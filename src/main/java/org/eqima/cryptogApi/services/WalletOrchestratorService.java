@@ -1,6 +1,7 @@
 package org.eqima.cryptogApi.services;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.eqima.cryptogApi.dto.AssociatedTokenAccountDto;
 import org.eqima.cryptogApi.dto.ServiceResponse;
 import org.eqima.cryptogApi.dto.response.VkaWalletCreationResponseDto;
@@ -12,14 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class WalletOrchestratorService {
-    @Autowired
     WalletService walletService;
-    @Autowired
     VkaApiService vkaApiService;
-    @Autowired
     UserService userService;
-    @Autowired
     AssociatedTokenAccountService associatedTokenAccountService;
 
     @Transactional
