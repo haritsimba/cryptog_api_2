@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WalletService {
@@ -36,5 +37,9 @@ public class WalletService {
 
     public Wallet getWalletById(Long id){
        return walletRepository.findById(id).orElse(null);
+    }
+
+    public List<Wallet> findWalletsByUsername(String username){
+        return walletRepository.findWalletByWalletName(username);
     }
 }
