@@ -22,7 +22,7 @@ keycloak:
     auth-server-url: http://localhost:8080
     client-id: volanaka
     client-secret: ${KEYCLOAK_CLIENT_SECRET}
-    grant-type: password
+    grant-type: client_credentials
     username: admin
     password: admin
     scope: openid
