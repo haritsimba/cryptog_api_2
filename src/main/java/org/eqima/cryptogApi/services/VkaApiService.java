@@ -3,8 +3,10 @@ package org.eqima.cryptogApi.services;
 import org.eqima.cryptogApi.dto.response.VkaWalletCreationResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+@Service
 public class VkaApiService {
     @Autowired
     WebClient vkaWebclientApi;

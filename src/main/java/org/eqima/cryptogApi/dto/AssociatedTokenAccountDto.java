@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class AssociatedTokenAccountDto {
     String mintName;
-    String mintAddress;
+    String mint;
     String tokenAccount;
 }
