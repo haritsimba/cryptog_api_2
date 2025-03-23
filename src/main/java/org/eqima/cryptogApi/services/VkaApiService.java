@@ -1,6 +1,6 @@
 package org.eqima.cryptogApi.services;
 
-import org.eqima.cryptogApi.dto.response.VkaWalletCreationDto;
+import org.eqima.cryptogApi.dto.response.VkaWalletCreationResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,19 +9,19 @@ public class VkaApiService {
     @Autowired
     WebClient vkaWebclientApi;
 
-    public VkaWalletCreationDto createWallet(){
-        ResponseEntity<VkaWalletCreationDto> walletResponse =  vkaWebclientApi.post()
+    public VkaWalletCreationResponseDto createWallet() {
+        ResponseEntity<VkaWalletCreationResponseDto> walletResponse = vkaWebclientApi.post()
                 .uri("/wallet")
                 .retrieve()
-                .toEntity(VkaWalletCreationDto.class)
+                .toEntity(VkaWalletCreationResponseDto.class)
                 .block();
-
-
-        if(walletResponse.getStatusCode().is2xxSuccessful()){
-            return walletResponse.getBody();
-        } else if (walletResponse.getStatusCode().is4xxClientError()) {
+        if(walletResponse == null){
             return null;
-        }else {
+        }
+        if (walletResponse.getStatusCode().is2xxSuccessful()) {
+            return walletResponse.getBody();
+        } else {
+            System.out.println("error status : " + walletResponse.getStatusCode() + "error message : " + walletResponse.getBody());
             return null;
         }
     }
