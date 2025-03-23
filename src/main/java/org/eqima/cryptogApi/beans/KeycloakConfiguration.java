@@ -2,6 +2,7 @@ package org.eqima.cryptogApi.beans;
 
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -28,15 +29,22 @@ public class KeycloakConfiguration {
     @Value("${keycloak.configuration.grant-type}")
     private String GRANT_TYPE;
 
-    @Bean
-    public Keycloak keycloak() {
-        return KeycloakBuilder.builder()
+    @Bean(name = "keycloakConfig")
+    public RealmResource keycloak() {
+        Keycloak keycloak = KeycloakBuilder.builder()
                 .serverUrl(ROOT_URL) // URL de Keycloak
                 .realm(REALM_NAME) // Utiliser "master" pour les actions admin
                 .clientId(CLIENT_ID)
+                .clientSecret(CLIENT_SECRET)
                 .username(USERNAME)
                 .password(PASSWORD)
                 .grantType(GRANT_TYPE)
                 .build();
+        if(!keycloak.isClosed()){
+            return keycloak.realm(REALM_NAME);
+        }
+        return null;
     }
+
+
 }
