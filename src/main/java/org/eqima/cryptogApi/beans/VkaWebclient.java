@@ -19,11 +19,10 @@ public class VkaWebclient {
     private String WALLET_BASE_URL;
 
     Logger LOGGER = LoggerFactory.getLogger(VkaWebclient.class);
-    @Bean(name = "anchor_webclient")
+    @Bean(name = "vkaWebclientApi")
     public WebClient AnchorWebClient(){
-        System.out.println(WALLET_BASE_URL);
         return WebClient.builder()
-                .baseUrl(WALLET_BASE_URL+"/wallet")
+                .baseUrl(WALLET_BASE_URL)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .filter((request, next) -> {
                     LOGGER.warn("Request Anchor URI api {}",request.url());
