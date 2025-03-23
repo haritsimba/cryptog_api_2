@@ -33,3 +33,6 @@ build/
 .vscode/
 
 token.git
+
+### maven
+.mvn
