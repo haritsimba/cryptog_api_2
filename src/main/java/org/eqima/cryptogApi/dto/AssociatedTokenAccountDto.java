@@ -6,5 +6,5 @@ import lombok.Data;
 public class AssociatedTokenAccountDto {
     String mintName;
     String mintAddress;
-    String associatedTokenAddress;
+    String tokenAccount;
 }

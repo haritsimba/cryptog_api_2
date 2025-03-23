@@ -6,13 +6,12 @@ Suivez ces étapes pour configurer Keycloak afin de gérer l'attribut personnali
 
 ### 1. Créer un nouveau client
 - Allez dans l'interface d'administration de Keycloak.
-- Créez un nouveau client dans votre royaume (realm).
+- Créez un nouveau client dans votre realm.
 - Configurez les paramètres du client selon vos besoins.
 
 ### 2. Activer le profil utilisateur
 - Allez dans **Realm Settings** > **User Profile**.
 - Créez un nouvel attribut personnalisé nommé `ATAs`.
-- Configurez l'attribut pour qu'il soit stocké sous forme de JSON.
 
 ### 3. Créer un nouveau scope client
 - Allez dans **Client Scopes**.

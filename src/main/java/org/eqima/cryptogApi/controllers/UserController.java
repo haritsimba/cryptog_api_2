@@ -32,6 +32,6 @@ public class UserController {
 
     @PutMapping("/{username}")
     public ResponseEntity<?> updateUserATA(@PathVariable(name = "username") String username, @RequestBody List<AssociatedTokenAccountDto> ATAs){
-        return ResponseEntity.ok().body(userService.addUserATA(username,ATAs));
+        return ResponseEntity.ok().body(userService.getAndUpdateUserATAs(username,ATAs));
     }
 }
