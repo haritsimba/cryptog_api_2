@@ -7,10 +7,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 public class VkaApiService {
     @Autowired
-    WebClient vkaWebclient;
+    WebClient vkaWebclientApi;
 
     public VkaWalletCreationDto createWallet(){
-        ResponseEntity<VkaWalletCreationDto> walletResponse =  vkaWebclient.post()
+        ResponseEntity<VkaWalletCreationDto> walletResponse =  vkaWebclientApi.post()
                 .uri("/wallet")
                 .retrieve()
                 .toEntity(VkaWalletCreationDto.class)

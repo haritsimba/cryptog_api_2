@@ -1,4 +1,8 @@
 package org.eqima.cryptogApi.dto.response;
 
-public class VkaWallet {
+import lombok.Data;
+
+@Data
+public class VkaWalletCreationDto {
+
 }
